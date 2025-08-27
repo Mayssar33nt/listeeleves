@@ -93,7 +93,7 @@ export default function WelcomePage({ onStudentsImported, onNavigateToStudents, 
       <main className="max-w-6xl mx-auto px-4 py-12">
         {/* Welcome Section */}
         <div className="text-center mb-16">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent text-5xl font-bold mb-6">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent text-4xl md:text-5xl font-bold mb-8 leading-tight py-2">
             مرحباً بك في نظام إدارة التلاميذ
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
