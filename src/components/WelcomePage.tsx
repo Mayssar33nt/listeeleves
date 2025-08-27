@@ -78,9 +78,11 @@ export default function WelcomePage({ onStudentsImported, onNavigateToStudents, 
       <header className="bg-white shadow-sm border-b-2 border-blue-100">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center gap-3">
-            <div className="bg-blue-600 p-3 rounded-xl shadow-lg">
-              <GraduationCap className="w-8 h-8 text-white" />
-            </div>
+            <img 
+              src="/logo mutanabi.png" 
+              alt="شعار مدرسة المتنبي" 
+              className="w-12 h-12 rounded-xl shadow-lg object-contain"
+            />
             <div>
               <h1 className="text-3xl font-bold text-gray-900">نظام إدارة تلاميذ/ات مدرسة المتنبي</h1>
               <p className="text-gray-600 mt-1">منصة عصرية لإدارة وفلترة بيانات التلاميذ</p>
