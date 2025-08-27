@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+
+body {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+}
+
+/* Print styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  .print-section,
+  .print-section * {
+    visibility: visible;
+  }
+  
+  .print-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  
+  /* Hide action buttons during print */
+  button {
+    display: none !important;
+  }
+  
+  .bg-gray-50 {
+    background-color: white !important;
+  }
+}
+
+/* PDF Export styles */
+.pdf-export {
+  background: white !important;
+  color: black !important;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pdf-export * {
+  background: white !important;
+  color: black !important;
+}
+
+.pdf-export .bg-gradient-to-r {
+  background: linear-gradient(to left, #2563eb, #4f46e5) !important;
+  color: white !important;
+}
+
+.pdf-export .bg-gradient-to-r * {
+  color: white !important;
+}
+
+.pdf-export .bg-blue-100 {
+  background: #dbeafe !important;
+  color: #1e40af !important;
+}
+
+.pdf-export .bg-green-100 {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+.pdf-export .bg-purple-100 {
+  background: #f3e8ff !important;
+  color: #7c3aed !important;
+}
+
+.pdf-export .bg-orange-100 {
+  background: #fed7aa !important;
+  color: #ea580c !important;
+}
+
+.pdf-export .bg-blue-50 {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+}
+
+.pdf-export .bg-gray-50 {
+  background: #f9fafb !important;
+  color: #374151 !important;
+}
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation for modal */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pulse {
+  animation: fadeInScale 0.3s ease-out;
+}
