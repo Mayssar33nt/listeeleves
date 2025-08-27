@@ -81,9 +81,9 @@ export default function WelcomePage({ onStudentsImported, onNavigateToStudents, 
             <img 
               src="/logo mutanabi.png" 
               alt="شعار مدرسة المتنبي" 
-              className="w-12 h-12 rounded-xl shadow-lg object-contain"
+              className="w-16 h-16 rounded-xl shadow-lg object-contain"
             />
-            <div>
+            <div className="mr-2">
               <h1 className="text-3xl font-bold text-gray-900">نظام إدارة تلاميذ/ات مدرسة المتنبي</h1>
               <p className="text-gray-600 mt-1">منصة عصرية لإدارة وفلترة بيانات التلاميذ</p>
             </div>

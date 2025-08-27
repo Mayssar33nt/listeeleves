@@ -121,9 +121,9 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
             <img 
               src="/logo mutanabi.png" 
               alt="شعار مدرسة المتنبي" 
-              className="w-10 h-10 rounded-lg shadow-md object-contain"
+              className="w-12 h-12 rounded-lg shadow-md object-contain"
             />
-            <div>
+            <div className="mr-2">
               <h1 className="text-3xl font-bold text-gray-900">بطاقة التلميذ(ة)</h1>
               <p className="text-gray-600 mt-1">المعلومات التفصيلية للتلميذ(ة)</p>
             </div>
