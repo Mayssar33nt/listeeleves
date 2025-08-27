@@ -221,6 +221,25 @@ export default function WelcomePage({ onStudentsImported, onNavigateToStudents, 
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-200 py-8 mt-16">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-gray-600 font-medium">
+              من تطوير المختص الاجتماعي <span className="text-blue-600 font-bold">ذ.اوعليت محمد</span>
+            </p>
+            <p className="text-gray-500">
+              مدرسة المتنبي الابتدائية - 2026
+            </p>
+            <div className="flex items-center gap-2 text-red-500 font-medium">
+              <span>صُنع بحب</span>
+              <span className="text-red-400">❤️</span>
+              <span>©</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
