@@ -14,16 +14,25 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
   const [copied, setCopied] = React.useState(false);
   const [isGeneratingPDF, setIsGeneratingPDF] = React.useState(false);
 
+  // === منطق تحديد الصورة حسب الفوج ===
+  const getGroupNumber = (g?: string) => {
+    const s = String(g ?? '').trim();
+    const n = parseInt(s, 10);
+    return n === 1 || n === 2 ? n : null;
+  };
+
+  const groupNum = getGroupNumber(student.group);
+  const scheduleImg =
+    groupNum === 1 ? '/assets/F1.png' :
+    groupNum === 2 ? '/assets/F2.png' :
+    null;
+
   const handlePrint = async () => {
     if (!printRef.current) return;
-    
     setIsGeneratingPDF(true);
-    
+
     try {
-      // Create a clone of the element for PDF generation
       const element = printRef.current;
-      
-      // Generate canvas from the element
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
@@ -32,39 +41,32 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
         width: element.scrollWidth,
         height: element.scrollHeight
       });
-      
-      // Create PDF
+
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgData = canvas.toDataURL('image/png');
-      
-      // Calculate dimensions to fit A4
+
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
-      
-      // Calculate scaling to fit the page with margins
+
       const margin = 20;
       const maxWidth = pdfWidth - (margin * 2);
       const maxHeight = pdfHeight - (margin * 2);
-      
+
       let finalWidth = maxWidth;
       let finalHeight = (imgHeight * maxWidth) / imgWidth;
-      
+
       if (finalHeight > maxHeight) {
         finalHeight = maxHeight;
         finalWidth = (imgWidth * maxHeight) / imgHeight;
       }
-      
-      // Center the image
+
       const x = (pdfWidth - finalWidth) / 2;
       const y = (pdfHeight - finalHeight) / 2;
-      
+
       pdf.addImage(imgData, 'PNG', x, y, finalWidth, finalHeight);
-      
-      // Save the PDF
       pdf.save(`بطاقة_${student.fullName}.pdf`);
-      
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('حدث خطأ أثناء إنشاء ملف PDF');
@@ -86,7 +88,7 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch {
       alert('تعذر نسخ البيانات');
     }
   };
@@ -132,10 +134,9 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-12">
-        {/* Student Card */}
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
           <div ref={printRef} className="p-8">
-            {/* Card Header */}
+            {/* معلومات التلميذ */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 -m-8 mb-8 p-8 text-white">
               <div className="flex items-center gap-6">
                 <div className="bg-white bg-opacity-20 p-4 rounded-2xl">
@@ -150,7 +151,6 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
               </div>
             </div>
 
-            {/* Student Information */}
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div className="bg-gray-50 rounded-2xl p-6">
@@ -189,7 +189,22 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
               </div>
             </div>
 
-            {/* Additional Info Section */}
+            {/* الصورة حسب الفوج */}
+            {scheduleImg && (
+              <div className="bg-white rounded-2xl p-4 shadow-sm print:shadow-none mt-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">
+                  استعمال الزمن - الفوج {groupNum}
+                </h3>
+                <img
+                  src={scheduleImg}
+                  alt={`استعمال الزمن للفوج ${groupNum}`}
+                  className="w-full h-auto rounded-xl"
+                  style={{ maxWidth: '900px' }}
+                />
+              </div>
+            )}
+
+            {/* ملخص البطاقة */}
             <div className="mt-8 bg-blue-50 rounded-2xl p-6">
               <h3 className="text-lg font-bold text-gray-900 mb-4">ملخص البطاقة</h3>
               <p className="text-gray-700 leading-relaxed">
@@ -200,7 +215,7 @@ export default function StudentCard({ student, onNavigateBack }: StudentCardProp
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* أزرار التحكم */}
           <div className="bg-gray-50 px-8 py-6">
             <div className="grid md:grid-cols-3 gap-4">
               <button
